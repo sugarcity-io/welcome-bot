@@ -11,7 +11,7 @@ COPY . .
 #RUN go test ./...
 
 # Build the Go binary
-RUN go build -o sugarcity-bot ./cmd/chat-bot
+RUN go build -o chat-bot ./cmd/chat-bot
 
 # Use the Alpine Linux image as the runtime stage
 FROM alpine:latest
