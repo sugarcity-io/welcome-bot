@@ -1,11 +1,7 @@
-// Create a bot to welcome new users to a slack workspace.
-// The bot will utilise the nextgen slack api.
-// The bot will utilise the slack events api, not the rtm api.
-// The bot will be a simple bot that will listen for the event
-// of a new user joining the workspace.
-// The bot will then send a welcome message to the new user.
-// The bot will also send a message to a channel in the workspace
-// to notify the workspace that a new user has joined.A
+// Sugarcity.io's very own bot.
+// Functionality as of now:
+//   * Welcomes new users to the workspace.
+// There is a lot of scaffolding code that could be expanded on for those who are keen.
 
 package main
 
