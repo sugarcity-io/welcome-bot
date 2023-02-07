@@ -2,7 +2,11 @@ package events
 
 import (
 	"fmt"
+	"math/rand"
 	"os"
+	"strings"
+
+	"time"
 
 	"github.com/slack-go/slack"
 	"github.com/slack-go/slack/slackevents"
