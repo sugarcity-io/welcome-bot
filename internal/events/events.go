@@ -210,6 +210,10 @@ func Start(api *slack.Client, client *socketmode.Client) {
 						// If the message contains the word "coffee", present the user with a four locale options: Northside, Southside, Central or Don't Care.
 						// Use the Slack Block Kit Builder to create the message: https://app.slack.com/block-kit-builder
 						if strings.Contains(ev.Text, "coffee") {
+
+							//Get the timestamp of the message.
+							ts := ev.TimeStamp
+
 							//Set the callback ID to "coffee" so we can identify the message later.
 							attachment := slack.Attachment{
 								CallbackID: "coffee",
@@ -242,7 +246,7 @@ func Start(api *slack.Client, client *socketmode.Client) {
 								},
 							}
 
-							_, _, err := api.PostMessage(ev.Channel, slack.MsgOptionAttachments(attachment))
+							_, _, err := api.PostMessage(ev.Channel, slack.MsgOptionAttachments(attachment), slack.MsgOptionTS(ts))
 							if err != nil {
 								fmt.Printf("failed posting message: %v", err)
 							}
@@ -300,12 +304,10 @@ func Start(api *slack.Client, client *socketmode.Client) {
 						// that was clicked.
 						value := callback.ActionCallback.AttachmentActions[0].Value
 
-						fmt.Printf("%s", value)
-
 						cs := randomCoffeeShop(value)
 
 						// Post the random coffee shop to the channel
-						_, _, err := api.PostMessage(callback.Channel.ID, slack.MsgOptionText(coffeeShopMessage(cs), false))
+						_, _, err := api.PostMessage(callback.Channel.ID, slack.MsgOptionText(coffeeShopMessage(cs), false), slack.MsgOptionTS(callback.MessageTs))
 						if err != nil {
 							fmt.Printf("failed posting message: %v", err)
 						}
