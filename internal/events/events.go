@@ -27,6 +27,33 @@ const (
 	TestChannelID = "C04MTDRBJGL"
 )
 
+// Returns a random greeting.
+func greeting() string {
+	greetings := []string{
+		"Hello",
+		"Hi",
+		"Hey",
+		"Greetings",
+		"Welcome",
+		"Howdy",
+		"Hello there",
+		"What's up",
+		"How's it going",
+		"Sup",
+		"Hey there",
+		"Yo",
+		"Hiya",
+		"Hi there",
+		"Good to see you",
+		"Long time no see",
+		"Nice to see you",
+		"How have you been",
+		"It's good to see you",
+		"What's new",
+	}
+	return greetings[rand.Intn(len(greetings))]
+}
+
 // Create a welcome to Sugarcity.io Slack workspace message.
 func welcomeMessage(u string) string {
 
@@ -84,9 +111,13 @@ func Start(api *slack.Client, client *socketmode.Client) {
 					innerEvent := eventsAPIEvent.InnerEvent
 					switch ev := innerEvent.Data.(type) {
 					case *slackevents.AppMentionEvent:
-						_, _, err := api.PostMessage(ev.Channel, slack.MsgOptionText("Yes, hello thar fren.", false))
-						if err != nil {
-							fmt.Printf("failed posting message: %v", err)
+
+						// If the message contains "ping", then respond with a randomly selected greeting message.
+						if strings.Contains(ev.Text, "ping") {
+							_, _, err := api.PostMessage(ev.Channel, slack.MsgOptionText(greeting(), false))
+							if err != nil {
+								fmt.Printf("failed posting message: %v", err)
+							}
 						}
 					case *slackevents.TeamJoinEvent:
 						u, err := getUserName(api, ev.User.ID)
@@ -114,6 +145,7 @@ func Start(api *slack.Client, client *socketmode.Client) {
 				default:
 					client.Debugf("unsupported Events API event received")
 				}
+
 			case socketmode.EventTypeInteractive:
 				callback, ok := evt.Data.(slack.InteractionCallback)
 				if !ok {
