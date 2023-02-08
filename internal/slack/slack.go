@@ -67,3 +67,24 @@ func GetBotToken() string {
 	}
 	return botToken
 }
+
+// Get DM channel ID.
+func GetDMChannelID(api *slack.Client, u string) (string, error) {
+	dmID, _, _, err := api.OpenConversation(&slack.OpenConversationParameters{
+		Users: []string{u},
+	})
+	if err != nil {
+		return "", fmt.Errorf("Error opening conversation: %s", err)
+
+	}
+	return dmID.ID, nil
+}
+
+// GetUserName gets the user name from the user ID.
+func GetUserName(api *slack.Client, userID string) (string, error) {
+	user, err := api.GetUserInfo(userID)
+	if err != nil {
+		return "", err
+	}
+	return user.ID, nil
+}

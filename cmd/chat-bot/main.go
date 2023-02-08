@@ -6,6 +6,8 @@
 package main
 
 import (
+	"log"
+
 	"github.com/sugarcity-io/chat-bot/internal/events"
 	internalSlack "github.com/sugarcity-io/chat-bot/internal/slack"
 )
@@ -18,5 +20,9 @@ func main() {
 	// Start listening to events from Slack.
 	events.Start(api, client)
 
-	client.Run()
+	err := client.Run()
+	if err != nil {
+		log.Fatalf("Error starting events: %s", err)
+	}
+
 }
