@@ -6,8 +6,8 @@
 package main
 
 import (
-	"github.com/sugarcity-io/welcome-bot/internal/events"
-	internalSlack "github.com/sugarcity-io/welcome-bot/internal/slack"
+	"github.com/sugarcity-io/chat-bot/internal/events"
+	internalSlack "github.com/sugarcity-io/chat-bot/internal/slack"
 )
 
 func main() {
