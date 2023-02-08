@@ -8,7 +8,7 @@ import (
 
 	"github.com/slack-go/slack"
 	"github.com/slack-go/slack/socketmode"
-	"github.com/sugarcity-io/welcome-bot/internal/utils"
+	"github.com/sugarcity-io/chat-bot/internal/utils"
 )
 
 // Create Slack socket Mode client.
