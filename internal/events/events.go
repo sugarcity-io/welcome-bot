@@ -10,6 +10,7 @@ import (
 	"github.com/slack-go/slack"
 	"github.com/slack-go/slack/slackevents"
 	"github.com/slack-go/slack/socketmode"
+	"github.com/sugarcity-io/chat-bot/internal/ping"
 	"github.com/sugarcity-io/chat-bot/internal/welcome"
 )
 
@@ -80,33 +81,6 @@ func randomCoffeeShop(locale string) CoffeeSpot {
 	return cs[n]
 }
 
-// Returns a random greeting.
-func greeting() string {
-	greetings := []string{
-		"Hello",
-		"Hi",
-		"Hey",
-		"Greetings",
-		"Welcome",
-		"Howdy",
-		"Hello there",
-		"What's up",
-		"How's it going",
-		"Sup",
-		"Hey there",
-		"Yo",
-		"Hiya",
-		"Hi there",
-		"Good to see you",
-		"Long time no see",
-		"Nice to see you",
-		"How have you been",
-		"It's good to see you",
-		"What's new",
-	}
-	return greetings[rand.Intn(len(greetings))]
-}
-
 // Create a coffee shop selection message.
 func coffeeShopMessage(cs CoffeeSpot) string {
 	var lm string
@@ -155,9 +129,9 @@ func Start(api *slack.Client, client *socketmode.Client) {
 
 						// If the message contains "ping", then respond with a randomly selected greeting message.
 						if strings.Contains(ev.Text, "ping") {
-							_, _, err := api.PostMessage(ev.Channel, slack.MsgOptionText(greeting(), false))
+							err := ping.Handler(api, ev)
 							if err != nil {
-								fmt.Printf("failed posting message: %v", err)
+								fmt.Printf("Error handling ping: %s", err)
 							}
 						}
 
@@ -207,7 +181,9 @@ func Start(api *slack.Client, client *socketmode.Client) {
 						}
 
 					case *slackevents.TeamJoinEvent:
-						// Make a list of channels to post in.
+						// When a new team member joins the workspace...
+						// Announce the new team member in the #general channel.
+						// Send a welcome message to the new team member.
 						err := welcome.Handler(api, ev)
 						if err != nil {
 							fmt.Printf("Failed to welcome the new team join: %v", err)
