@@ -48,6 +48,8 @@ var mackayCoffeeSpots = []CoffeeSpot{
 	{Name: "Wake House", Locale: "Northside", Location: "https://goo.gl/maps/861zYQQEq93ZCdhV8"},
 	{Name: "Byrnes (Willetts Road)", Locale: "Northside", Location: "https://g.page/byrnes-willetts-road?share"},
 	{Name: "Byrnes (Andergrove)", Locale: "Northside", Location: "https://goo.gl/maps/jKwsyWeYTxfvjohx6"},
+	{Name: "Woodman's Axe Espresso Bar Mackay", Locale: "Central", Location: "https://goo.gl/maps/qnRLkje6xnJUZ5in8"},
+	{Name: "Primal Coffee Roasters", Locale: "Southside", Location: "https://goo.gl/maps/m3xtKdfv2ENjLo9y6"},
 }
 
 // Function which returns a random coffee shop from the list, optionally filtered by locale.
