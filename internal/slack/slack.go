@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strings"
 
 	"github.com/slack-go/slack"
 	"github.com/slack-go/slack/socketmode"
-	"github.com/sugarcity-io/chat-bot/internal/utils"
 )
 
 // Create Slack socket Mode client.
@@ -49,7 +49,7 @@ func GetAppToken() string {
 		os.Exit(1)
 	}
 	// Check if the app token starts with xapp-.
-	if !utils.HasPrefix(appToken, "xapp-") {
+	if !strings.HasPrefix(appToken, "xapp-") {
 		fmt.Fprintf(os.Stderr, "SLACK_APP_TOKEN must start with xapp-")
 	}
 	return appToken
@@ -62,7 +62,7 @@ func GetBotToken() string {
 		fmt.Println("SLACK_BOT_TOKEN must be set")
 		os.Exit(1)
 	}
-	if !utils.HasPrefix(botToken, "xoxb-") {
+	if !strings.HasPrefix(botToken, "xoxb-") {
 		fmt.Fprintf(os.Stderr, "SLACK_BOT_TOKEN must start with xoxb-")
 	}
 	return botToken
