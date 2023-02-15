@@ -1,0 +1,6 @@
+Hi <@%s>, welcome to the Sugarcity.io Slack! :wave: :sugarcity-green:
+
+We are excited to have you on board with Mackay's greatest gathering of technologists and innovators! :rocket:
+It would be awesome if you could introduce yourself in the <#%s> channel so we can get to know you! :smile:
+We have a bunch of channels to checkout, like <#%s>, <#%s>, <#%s>, <#%s>, <#%s> and a load more. :tada:
+Our community is here to support you, so don't hesitate to ask questions or share your own knowledge. :muscle:

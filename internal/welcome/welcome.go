@@ -2,6 +2,8 @@
 package welcome
 
 import (
+	_ "embed"
+
 	"fmt"
 
 	"github.com/slack-go/slack"
@@ -9,6 +11,9 @@ import (
 
 	internalSlack "github.com/sugarcity-io/chat-bot/internal/slack"
 )
+
+//go:embed message.txt
+var message string
 
 // List channel IDs as constants.
 const (
@@ -33,11 +38,7 @@ const (
 // Create a welcome to Sugarcity.io Slack workspace message.
 func welcomeMessage(u string) string {
 
-	msg := fmt.Sprintf("Hi <@%s>, welcome to the Sugarcity.io Slack! :wave: :sugarcity-green:\n"+
-		"We are excited to have you on board with Mackay's greatest gathering of technologists and innovators! :rocket:\n"+
-		"It would be awesome if you could introduce yourself in the <#%s> channel so we can get to know you! :smile:\n"+
-		"We have a bunch of channels to checkout, like <#%s>, <#%s>, <#%s>, <#%s>, <#%s> and a load more. :tada:\n"+
-		"Our community is here to support you, so don't hesitate to ask questions or share your own knowledge. :muscle:\n", u, GeneralChannelID, CodeConvoChannelID, EventsChannelID, InfoSecChannelID, ITTechChannelID, GamingChannelID)
+	msg := fmt.Sprintf(message, u, GeneralChannelID, CodeConvoChannelID, EventsChannelID, InfoSecChannelID, ITTechChannelID, GamingChannelID)
 	return msg
 }
 
