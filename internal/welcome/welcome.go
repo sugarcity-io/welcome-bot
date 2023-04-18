@@ -44,7 +44,7 @@ func welcomeMessage(u string) string {
 
 // Create a message to introduce a new member to the Sugarcity.io Slack workspace.
 func introductionToGroupMessage(u string) string {
-	msg := fmt.Sprintf("Hi Sugarcity-ites :wave:\n"+
+	msg := fmt.Sprintf("Hi Sugarcitians :wave:\n"+
 		"Please welcome <@%s> to the Sugarcity.io Slack Workspace! :sugarcity-green:\n"+
 		"Make them feel welcome! :smile:\n", u)
 	return msg
