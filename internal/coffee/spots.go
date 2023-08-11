@@ -19,7 +19,6 @@ var mackayCoffeeSpots = []CoffeeSpot{
 	{Name: "The Coffee Club (Caneland Central)", Locale: "Central", Location: "https://goo.gl/maps/YfBNx9mPKGW2dFcZA"},
 	{Name: "The Grazing Goat", Locale: "Central", Location: "https://goo.gl/maps/KrZQ1z9Mt1ccaUuN8"},
 	{Name: "Dispensary", Locale: "Central", Location: "https://g.page/thedispensarymackay?share"},
-	{Name: "Oscar's Cafe & Bar", Locale: "Central", Location: "https://goo.gl/maps/dAVnSLAJ2jrPa6My6"},
 	{Name: "Foodspace", Locale: "Central", Location: "https://g.page/FoodspaceCafe?share"},
 	{Name: "Ador'a Cafe", Locale: "Central", Location: "https://goo.gl/maps/r88eUCzCJ59j5cfG8"},
 	{Name: "Stellarossa (Parkside)", Locale: "Southside", Location: "https://g.page/StellarossaParkside?share"},
