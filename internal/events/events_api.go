@@ -2,7 +2,9 @@ package events
 
 import (
 	"fmt"
+	"strconv"
 	"strings"
+	"time"
 
 	"github.com/slack-go/slack"
 	"github.com/slack-go/slack/slackevents"
@@ -55,6 +57,11 @@ func teamJoin(ev *slackevents.TeamJoinEvent, api *slack.Client) {
 }
 
 func appMention(ev *slackevents.AppMentionEvent, api *slack.Client) {
+	// If the message was created in the past, then ignore it.
+	if pastAppMention(ev) {
+		return
+	}
+
 	// If the message contains "ping", then respond with a randomly selected greeting message.
 	if strings.Contains(ev.Text, "ping") {
 		err := ping.Handler(api, ev)
@@ -68,5 +75,23 @@ func appMention(ev *slackevents.AppMentionEvent, api *slack.Client) {
 	if strings.Contains(ev.Text, "coffee") {
 		coffee.Handler(api, ev)
 	}
+}
 
+// pastAppMention checks how recently the message was created.
+// The message is considered in the past if it was created 2 seconds ago or more.
+func pastAppMention(ev *slackevents.AppMentionEvent) bool {
+
+	// Split the timestamp into seconds and nanoseconds.
+	// Only the seconds are needed.
+	tp := strings.Split(ev.TimeStamp, ".")
+
+	ct := time.Now().Unix()
+	et, err := strconv.ParseInt(tp[0], 10, 64)
+	if err != nil {
+		fmt.Printf("Error parsing event timestamp: %s", err)
+	}
+
+	td := ct - et
+
+	return td >= 2
 }
