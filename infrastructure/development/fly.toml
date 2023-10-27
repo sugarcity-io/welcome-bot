@@ -1,0 +1,19 @@
+# fly.toml app configuration file generated for sugarcity-chatbot-dev on 2023-07-27T15:34:08+10:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "sugarcity-chatbot-development"
+primary_region = "syd"
+
+[env]
+  ENVIRONMENT = "development"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = false
+  auto_start_machines = true
+  min_machines_running = 0
+  max_machines_running = 1
+  processes = ["app"]
